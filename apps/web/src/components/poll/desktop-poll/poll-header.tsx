@@ -57,7 +57,7 @@ const PollHeader: React.FunctionComponent = () => {
                 endTime={option.endTime}
               />
             ) : null}
-            {!poll.hidden && !admin ? (
+            {!poll.hidden && admin ? (
                 <div className="flex justify-center">
                   <ScoreSummary
                       yesScore={numVotes.yes}
