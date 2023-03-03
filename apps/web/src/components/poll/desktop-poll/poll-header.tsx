@@ -27,7 +27,7 @@ const TimeRange: React.FunctionComponent<{
 };
 
 const PollHeader: React.FunctionComponent = () => {
-  const { options, getScore } = usePoll();
+  const { poll, options, getScore, admin } = usePoll();
   const { setActiveOptionId, columnWidth } = usePollContext();
 
   return (
@@ -57,12 +57,14 @@ const PollHeader: React.FunctionComponent = () => {
                 endTime={option.endTime}
               />
             ) : null}
-            <div className="flex justify-center">
-              <ScoreSummary
-                yesScore={numVotes.yes}
-                ifNeedBeScore={numVotes.ifNeedBe}
-              />
-            </div>
+            {!poll.hidden && !admin ? (
+                <div className="flex justify-center">
+                  <ScoreSummary
+                      yesScore={numVotes.yes}
+                      ifNeedBeScore={numVotes.ifNeedBe}
+                  />
+                </div>
+            ) : null}
           </div>
         );
       })}
