@@ -20,4 +20,5 @@ export type GetPollApiResponse = {
   deleted: boolean;
   hidden: boolean;
   commentsEnabled: boolean;
+  ifNeedBeEnabled: boolean;
 };

@@ -52,6 +52,8 @@
   "hidden": "Hidden Poll",
   "hiddenTooltip": "For hidden polls only the creator can see the votes of the other people.",
   "ifNeedBe": "If need be",
+  "ifNeedBeEnabled" : "Enable 'if need be' votes",
+  "ifNeedBeEnabledTooltip" : "Enable user to vote 'if need be' on options",
   "linkHasExpired": "Your link has expired or is no longer valid",
   "loading": "Loading…",
   "loadingParticipants": "Loading participants…",

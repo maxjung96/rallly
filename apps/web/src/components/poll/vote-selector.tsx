@@ -3,6 +3,7 @@ import clsx from "clsx";
 import * as React from "react";
 
 import VoteIcon from "./vote-icon";
+import {usePoll} from "@/components/poll-context";
 
 export interface VoteSelectorProps {
   value?: VoteType;
@@ -14,10 +15,12 @@ export interface VoteSelectorProps {
 }
 
 const orderedVoteTypes: VoteType[] = ["yes", "ifNeedBe", "no"];
+const orderedVoteTypesWithoutIfNeedBe: VoteType[] = ["yes", "no"];
 
-const getNext = (value: VoteType) => {
-  return orderedVoteTypes[
-    (orderedVoteTypes.indexOf(value) + 1) % orderedVoteTypes.length
+const getNext = (value: VoteType, ifNeedBeEnabled: boolean) => {
+  const voteTypes = ifNeedBeEnabled ? orderedVoteTypes : orderedVoteTypesWithoutIfNeedBe;
+  return voteTypes[
+    (voteTypes.indexOf(value) + 1) % voteTypes.length
   ];
 };
 
@@ -28,6 +31,7 @@ export const VoteSelector = React.forwardRef<
   { value, onChange, onFocus, onBlur, onKeyDown, className },
   ref,
 ) {
+  const { poll } = usePoll();
   return (
     <button
       data-testid="vote-selector"
@@ -40,7 +44,7 @@ export const VoteSelector = React.forwardRef<
         className,
       )}
       onClick={() => {
-        onChange?.(value ? getNext(value) : orderedVoteTypes[0]);
+        onChange?.(value ? getNext(value, poll.ifNeedBeEnabled) : orderedVoteTypes[0]);
       }}
       ref={ref}
     >

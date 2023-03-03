@@ -14,6 +14,7 @@ export interface PollDetailsData {
   description: string;
   hidden: boolean;
   commentsEnabled: boolean;
+  ifNeedBeEnabled: boolean;
 }
 
 export const PollDetailsForm: React.FunctionComponent<
@@ -104,6 +105,23 @@ export const PollDetailsForm: React.FunctionComponent<
               type="checkbox"
               id="commentsEnabled"
               {...register("commentsEnabled")}
+          />
+          <span className="slider round"></span>
+        </label>
+      </div>
+      <div className="formField">
+        <Tooltip
+            content={t("ifNeedBeEnabledTooltip")}
+            placement="top"
+        >
+          <label htmlFor="ifNeedBeEnabled">{t("ifNeedBeEnabled")}</label>
+        </Tooltip>
+        <br/>
+        <label className="switch">
+          <input
+              type="checkbox"
+              id="ifNeedBeEnabled"
+              {...register("ifNeedBeEnabled")}
           />
           <span className="slider round"></span>
         </label>

@@ -40,6 +40,7 @@ const defaultSelectFields: {
   deleted: true;
   hidden: true;
   commentsEnabled: true;
+  ifNeedBeEnabled: true;
 } = {
   id: true,
   timeZone: true,
@@ -64,6 +65,7 @@ const defaultSelectFields: {
   deleted: true,
   hidden: true,
   commentsEnabled: true,
+  ifNeedBeEnabled: true,
 };
 
 const getPollIdFromAdminUrlId = async (urlId: string) => {
@@ -99,7 +101,8 @@ export const polls = router({
         options: z.string().array(),
         demo: z.boolean().optional(),
         hidden: z.boolean().optional(),
-        commentsEnabled: z.boolean().optional()
+        commentsEnabled: z.boolean().optional(),
+        ifNeedBeEnabled: z.boolean().optional()
       }),
     )
     .mutation(async ({ ctx, input }): Promise<{ urlId: string }> => {
@@ -150,7 +153,8 @@ export const polls = router({
             },
           },
           hidden: input.hidden,
-          commentsEnabled: input.commentsEnabled
+          commentsEnabled: input.commentsEnabled,
+          ifNeedBeEnabled: input.ifNeedBeEnabled
         },
       });
 
@@ -210,7 +214,8 @@ export const polls = router({
         notifications: z.boolean().optional(),
         closed: z.boolean().optional(),
         hidden: z.boolean().optional(),
-        commentsEnabled: z.boolean().optional()
+        commentsEnabled: z.boolean().optional(),
+        ifNeedBeEnabled: z.boolean().optional()
       }),
     )
     .mutation(async ({ input }): Promise<GetPollApiResponse> => {
@@ -249,7 +254,8 @@ export const polls = router({
           notifications: input.notifications,
           closed: input.closed,
           hidden: input.hidden,
-          commentsEnabled: input.commentsEnabled
+          commentsEnabled: input.commentsEnabled,
+          ifNeedBeEnabled: input.ifNeedBeEnabled
         },
       });
 

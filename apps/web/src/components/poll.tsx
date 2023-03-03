@@ -96,10 +96,12 @@ export const Poll = (props: { children?: React.ReactNode }) => {
                       <VoteIcon type="yes" />
                       <span>{t("yes")}</span>
                     </span>
-                    <span className="inline-flex items-center space-x-1">
-                      <VoteIcon type="ifNeedBe" />
-                      <span>{t("ifNeedBe")}</span>
-                    </span>
+                    {poll.ifNeedBeEnabled ? (
+                        <span className="inline-flex items-center space-x-1">
+                          <VoteIcon type="ifNeedBe"/>
+                          <span>{t("ifNeedBe")}</span>
+                        </span>
+                    ) : null}
                     <span className="inline-flex items-center space-x-1">
                       <VoteIcon type="no" />
                       <span>{t("no")}</span>
