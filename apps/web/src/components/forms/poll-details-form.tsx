@@ -13,6 +13,7 @@ export interface PollDetailsData {
   location: string;
   description: string;
   hidden: boolean;
+  commentsEnabled: boolean;
 }
 
 export const PollDetailsForm: React.FunctionComponent<
@@ -86,6 +87,23 @@ export const PollDetailsForm: React.FunctionComponent<
               type="checkbox"
               id="hidden"
               {...register("hidden")}
+          />
+          <span className="slider round"></span>
+        </label>
+      </div>
+      <div className="formField">
+        <Tooltip
+            content={t("commentsEnabledTooltip")}
+            placement="top"
+        >
+          <label htmlFor="commentsEnabled">{t("commentsEnabled")}</label>
+        </Tooltip>
+        <br/>
+        <label className="switch">
+          <input
+              type="checkbox"
+              id="commentsEnabled"
+              {...register("commentsEnabled")}
           />
           <span className="slider round"></span>
         </label>

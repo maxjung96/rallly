@@ -19,4 +19,5 @@ export type GetPollApiResponse = {
   createdAt: Date;
   deleted: boolean;
   hidden: boolean;
+  commentsEnabled: boolean;
 };

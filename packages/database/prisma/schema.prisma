@@ -55,6 +55,7 @@ model Poll {
   participantUrlId String        @unique @map("participant_url_id")
   adminUrlId       String        @unique @map("admin_url_id")
   hidden           Boolean       @default(false)
+  commentsEnabled  Boolean       @default(true) @map("comments_enabled")
 
   @@index([userId], type: Hash)
   @@map("polls")

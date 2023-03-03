@@ -14,6 +14,8 @@
   "comment": "Comment",
   "commentPlaceholder": "Leave a comment on this poll (visible to everyone)",
   "comments": "Comments",
+  "commentsEnabled" : "Enable comments",
+  "commentsEnabledTooltip" : "Enable comments for this poll",
   "continue": "Continue",
   "copied": "Copied",
   "copyLink": "Copy link",

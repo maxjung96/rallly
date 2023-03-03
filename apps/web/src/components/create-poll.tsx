@@ -60,6 +60,7 @@ const Page: React.FunctionComponent<CreatePollPageProps> = ({
         title,
         location,
         description,
+        commentsEnabled: true
       },
       options: {
         view,
@@ -127,7 +128,8 @@ const Page: React.FunctionComponent<CreatePollPageProps> = ({
         },
         timeZone: formData?.options?.timeZone,
         options: required(formData?.options?.options).map(encodeDateOption),
-        hidden: formData?.eventDetails?.hidden
+        hidden: formData?.eventDetails?.hidden,
+        commentsEnabled: formData?.eventDetails?.commentsEnabled
       });
     }
   };
