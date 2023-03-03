@@ -26,7 +26,7 @@ const minSidebarWidth = 200;
 const Poll: React.FunctionComponent = () => {
   const { t } = useTranslation("app");
 
-  const { poll, options, targetTimeZone, setTargetTimeZone, userAlreadyVoted } =
+  const { poll, options, targetTimeZone, setTargetTimeZone, userAlreadyVoted, admin } =
     usePoll();
 
   const session = useUser();
@@ -219,7 +219,7 @@ const Poll: React.FunctionComponent = () => {
                 </m.div>
               ) : null}
             </AnimatePresence>
-            {(poll.hidden ? participants.filter(participant => session.user.id === participant.userId) : participants).map((participant, i) => {
+            {(poll.hidden && !admin ? participants.filter(participant => session.user.id === participant.userId) : participants).map((participant, i) => {
               return (
                   <ParticipantRow
                       key={i}
