@@ -184,7 +184,7 @@ const PollOption: React.FunctionComponent<PollOptionProps> = ({
   yesScore,
   optionId,
 }) => {
-  const { getVote } = usePoll();
+  const { poll, getVote, admin } = usePoll();
   const showVotes = !!(selectedParticipantId || editable);
   const [expanded, setExpanded] = React.useState(false);
   const selectorRef = React.useRef<HTMLButtonElement>(null);
@@ -227,7 +227,7 @@ const PollOption: React.FunctionComponent<PollOptionProps> = ({
       <div className="flex select-none items-center transition duration-75">
         <div className="mr-3 shrink-0 grow">{children}</div>
         <AnimatePresence initial={false}>
-          {editable ? null : (
+          {editable || (poll.hidden && !admin) ? null : (
             <m.button
               exit={{ opacity: 0, x: -10 }}
               type="button"
@@ -252,9 +252,11 @@ const PollOption: React.FunctionComponent<PollOptionProps> = ({
             </m.button>
           )}
         </AnimatePresence>
-        <div className="mx-3">
-          <ScoreSummary yesScore={score} />
-        </div>
+        {!poll.hidden || admin ? (
+            <div className="mx-3">
+              <ScoreSummary yesScore={score}/>
+            </div>
+        ) : null}
         <CollapsibleContainer
           expanded={showVotes}
           className="relative flex justify-center"
