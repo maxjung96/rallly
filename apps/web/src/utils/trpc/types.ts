@@ -18,4 +18,5 @@ export type GetPollApiResponse = {
   notifications: boolean;
   createdAt: Date;
   deleted: boolean;
+  hidden: boolean;
 };

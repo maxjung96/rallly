@@ -47,6 +47,8 @@
   "guestSessionNotice": "You are using a guest session. This allows us to recognize you if you come back later so you can edit your votes.",
   "guestSessionReadMore": "Read more about guest sessions.",
   "hide": "Hide",
+  "hidden": "Hidden Poll",
+  "hiddenTooltip": "For hidden polls only the creator can see the votes of the other people.",
   "ifNeedBe": "If need be",
   "linkHasExpired": "Your link has expired or is no longer valid",
   "loading": "Loading…",

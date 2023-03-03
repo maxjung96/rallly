@@ -125,6 +125,7 @@ const Tooltip: React.FunctionComponent<TooltipProps> = ({
                   top: y ?? "",
                   left: x ?? "",
                   maxWidth: width,
+                  zIndex: 40
                 },
               })}
             >

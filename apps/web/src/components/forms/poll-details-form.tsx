@@ -3,6 +3,8 @@ import { useTranslation } from "next-i18next";
 import * as React from "react";
 import { useForm } from "react-hook-form";
 
+import Tooltip from "@/components/tooltip";
+
 import { requiredString } from "../../utils/form-validation";
 import { PollFormProps } from "./types";
 
@@ -10,6 +12,7 @@ export interface PollDetailsData {
   title: string;
   location: string;
   description: string;
+  hidden: boolean;
 }
 
 export const PollDetailsForm: React.FunctionComponent<
@@ -69,6 +72,23 @@ export const PollDetailsForm: React.FunctionComponent<
           rows={5}
           {...register("description")}
         />
+      </div>
+      <div className="formField">
+        <Tooltip
+            content={t("hiddenTooltip")}
+            placement="top"
+        >
+          <label htmlFor="hidden">{t("hidden")}</label>
+        </Tooltip>
+        <br/>
+        <label className="switch">
+          <input
+              type="checkbox"
+              id="hidden"
+              {...register("hidden")}
+          />
+          <span className="slider round"></span>
+        </label>
       </div>
     </form>
   );

@@ -38,6 +38,7 @@ const defaultSelectFields: {
   };
   user: true;
   deleted: true;
+  hidden: true;
 } = {
   id: true,
   timeZone: true,
@@ -60,6 +61,7 @@ const defaultSelectFields: {
   },
   user: true,
   deleted: true,
+  hidden: true,
 };
 
 const getPollIdFromAdminUrlId = async (urlId: string) => {
@@ -94,6 +96,7 @@ export const polls = router({
         }),
         options: z.string().array(),
         demo: z.boolean().optional(),
+        hidden: z.boolean().optional()
       }),
     )
     .mutation(async ({ ctx, input }): Promise<{ urlId: string }> => {
@@ -143,6 +146,7 @@ export const polls = router({
               })),
             },
           },
+          hidden: input.hidden
         },
       });
 
@@ -201,6 +205,7 @@ export const polls = router({
         optionsToAdd: z.string().array().optional(),
         notifications: z.boolean().optional(),
         closed: z.boolean().optional(),
+        hidden: z.boolean().optional()
       }),
     )
     .mutation(async ({ input }): Promise<GetPollApiResponse> => {
@@ -238,6 +243,7 @@ export const polls = router({
           timeZone: input.timeZone,
           notifications: input.notifications,
           closed: input.closed,
+          hidden: input.hidden
         },
       });
 

@@ -54,6 +54,7 @@ model Poll {
   touchedAt        DateTime      @default(now()) @map("touched_at")
   participantUrlId String        @unique @map("participant_url_id")
   adminUrlId       String        @unique @map("admin_url_id")
+  hidden           Boolean       @default(false)
 
   @@index([userId], type: Hash)
   @@map("polls")

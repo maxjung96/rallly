@@ -158,6 +158,7 @@ const ManagePoll: React.FunctionComponent<{
           title: poll.title,
           location: poll.location ?? "",
           description: poll.description ?? "",
+          hidden: poll.hidden
         }}
         className="w-[500px] p-3 sm:p-4"
         onSubmit={(data) => {

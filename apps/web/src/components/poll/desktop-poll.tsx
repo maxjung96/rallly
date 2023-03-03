@@ -5,6 +5,7 @@ import { useMeasure } from "react-use";
 
 import ArrowLeft from "@/components/icons/arrow-left.svg";
 import ArrowRight from "@/components/icons/arrow-right.svg";
+import {useUser} from "@/components/user-provider";
 
 import { Button } from "../button";
 import { useNewParticipantModal } from "../new-participant-modal";
@@ -27,6 +28,8 @@ const Poll: React.FunctionComponent = () => {
 
   const { poll, options, targetTimeZone, setTargetTimeZone, userAlreadyVoted } =
     usePoll();
+
+  const session = useUser();
 
   const { participants } = useParticipants();
 
@@ -216,36 +219,37 @@ const Poll: React.FunctionComponent = () => {
                 </m.div>
               ) : null}
             </AnimatePresence>
-            {participants.map((participant, i) => {
+            {(poll.hidden ? participants.filter(participant => session.user.id === participant.userId) : participants).map((participant, i) => {
               return (
-                <ParticipantRow
-                  key={i}
-                  className={
-                    editingParticipantId &&
-                    editingParticipantId !== participant.id
-                      ? "opacity-50"
-                      : ""
-                  }
-                  participant={participant}
-                  disableEditing={!!editingParticipantId}
-                  editMode={editingParticipantId === participant.id}
-                  onChangeEditMode={(isEditing) => {
-                    if (isEditing) {
-                      setShouldShowNewParticipantForm(false);
-                      setEditingParticipantId(participant.id);
-                    }
-                  }}
-                  onSubmit={async ({ votes }) => {
-                    await updateParticipant.mutateAsync({
-                      participantId: participant.id,
-                      pollId: poll.id,
-                      votes,
-                    });
-                    setEditingParticipantId(null);
-                  }}
-                />
+                  <ParticipantRow
+                      key={i}
+                      className={
+                        editingParticipantId &&
+                        editingParticipantId !== participant.id
+                            ? "opacity-50"
+                            : ""
+                      }
+                      participant={participant}
+                      disableEditing={!!editingParticipantId}
+                      editMode={editingParticipantId === participant.id}
+                      onChangeEditMode={(isEditing) => {
+                        if (isEditing) {
+                          setShouldShowNewParticipantForm(false);
+                          setEditingParticipantId(participant.id);
+                        }
+                      }}
+                      onSubmit={async ({votes}) => {
+                        await updateParticipant.mutateAsync({
+                          participantId: participant.id,
+                          pollId: poll.id,
+                          votes,
+                        });
+                        setEditingParticipantId(null);
+                      }}
+                  />
               );
-            })}
+            })
+            }
           </div>
           <AnimatePresence initial={false}>
             {!poll.closed &&

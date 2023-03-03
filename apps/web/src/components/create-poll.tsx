@@ -127,6 +127,7 @@ const Page: React.FunctionComponent<CreatePollPageProps> = ({
         },
         timeZone: formData?.options?.timeZone,
         options: required(formData?.options?.options).map(encodeDateOption),
+        hidden: formData?.eventDetails?.hidden
       });
     }
   };
