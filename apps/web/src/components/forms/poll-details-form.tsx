@@ -3,6 +3,7 @@ import { useTranslation } from "next-i18next";
 import * as React from "react";
 import { useForm } from "react-hook-form";
 
+import Switch from "@/components/switch";
 import Tooltip from "@/components/tooltip";
 
 import { requiredString } from "../../utils/form-validation";
@@ -26,7 +27,11 @@ export const PollDetailsForm: React.FunctionComponent<
     register,
     watch,
     formState: { errors },
+    setValue
   } = useForm<PollDetailsData>({ defaultValues });
+
+  const [hidden, setHidden] = React.useState(defaultValues?.hidden ?? false);
+  register("hidden");
 
   React.useEffect(() => {
     if (onChange) {
@@ -83,14 +88,13 @@ export const PollDetailsForm: React.FunctionComponent<
           <label htmlFor="hidden">{t("hidden")}</label>
         </Tooltip>
         <br/>
-        <label className="switch">
-          <input
-              type="checkbox"
-              id="hidden"
-              {...register("hidden")}
-          />
-          <span className="slider round"></span>
-        </label>
+        <Switch
+            checked={hidden}
+            onChange={(checked) => {
+              setHidden(checked);
+              setValue("hidden", checked);
+            }}
+        />
       </div>
       <div className="formField">
         <Tooltip
