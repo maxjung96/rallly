@@ -34,6 +34,8 @@ export const PollDetailsForm: React.FunctionComponent<
   register("hidden");
   const [commentsEnabled, setCommentsEnabled] = React.useState(defaultValues?.commentsEnabled ?? true);
   register("commentsEnabled");
+  const [ifNeedBeEnabled, setIfNeedBeEnabled] = React.useState(defaultValues?.ifNeedBeEnabled ?? true);
+  register("ifNeedBeEnabled");
 
   React.useEffect(() => {
     if (onChange) {
@@ -122,14 +124,13 @@ export const PollDetailsForm: React.FunctionComponent<
           <label htmlFor="ifNeedBeEnabled">{t("ifNeedBeEnabled")}</label>
         </Tooltip>
         <br/>
-        <label className="switch">
-          <input
-              type="checkbox"
-              id="ifNeedBeEnabled"
-              {...register("ifNeedBeEnabled")}
-          />
-          <span className="slider round"></span>
-        </label>
+        <Switch
+            checked={ifNeedBeEnabled}
+            onChange={(checked) => {
+              setIfNeedBeEnabled(checked);
+              setValue("ifNeedBeEnabled", checked);
+            }}
+        />
       </div>
     </form>
   );
