@@ -59,6 +59,8 @@ model Poll {
   ifNeedBeEnabled Boolean       @default(true) @map("if_need_be_enabled")
   voteLimitPerOptionEnabled Boolean @default(true) @map("vote_limit_per_option_enabled")
   voteLimitPerOption Int?        @map("vote_limit_per_option")
+  voteLimitPerParticipantEnabled Boolean @default(true) @map("vote_limit_per_participant_enabled")
+  voteLimitPerParticipant Int?   @map("vote_limit_per_participant")
 
   @@index([userId], type: Hash)
   @@map("polls")

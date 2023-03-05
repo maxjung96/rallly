@@ -23,6 +23,7 @@ export interface PollOptionProps {
   participants: Participant[];
   selectedParticipantId?: string;
   optionId: string;
+  disabledForVoteLimitPerParticipant: boolean;
 }
 
 const CollapsibleContainer: React.FunctionComponent<{
@@ -184,6 +185,7 @@ const PollOption: React.FunctionComponent<PollOptionProps> = ({
   yesScore,
   ifNeedBeScore,
   optionId,
+  disabledForVoteLimitPerParticipant
 }) => {
   const { poll, getVote, admin } = usePoll();
   const showVotes = !!(selectedParticipantId || editable);
@@ -269,7 +271,7 @@ const PollOption: React.FunctionComponent<PollOptionProps> = ({
                 ref={selectorRef}
                 value={vote}
                 onChange={onChange}
-                disabled={poll.voteLimitPerOptionEnabled && (yesScore + ifNeedBeScore) >= poll.voteLimitPerOption}
+                disabled={(poll.voteLimitPerOptionEnabled && (yesScore + ifNeedBeScore) >= poll.voteLimitPerOption) || disabledForVoteLimitPerParticipant}
               />
             </div>
           ) : (

@@ -40,6 +40,8 @@ const defaultSelectFields: {
   ifNeedBeEnabled: true;
   voteLimitPerOptionEnabled: true;
   voteLimitPerOption: true;
+  voteLimitPerParticipantEnabled: true;
+  voteLimitPerParticipant: true;
 } = {
   id: true,
   timeZone: true,
@@ -67,6 +69,8 @@ const defaultSelectFields: {
   ifNeedBeEnabled: true,
   voteLimitPerOptionEnabled: true,
   voteLimitPerOption: true,
+  voteLimitPerParticipantEnabled: true,
+  voteLimitPerParticipant: true
 };
 
 const getPollIdFromAdminUrlId = async (urlId: string) => {
@@ -105,7 +109,9 @@ export const polls = router({
         commentsEnabled: z.boolean().optional(),
         ifNeedBeEnabled: z.boolean().optional(),
         voteLimitPerOptionEnabled: z.boolean().optional(),
-        voteLimitPerOption: z.number().optional()
+        voteLimitPerOption: z.number().optional(),
+        voteLimitPerParticipantEnabled: z.boolean().optional(),
+        voteLimitPerParticipant: z.number().optional()
       }),
     )
     .mutation(async ({ ctx, input }): Promise<{ urlId: string }> => {
@@ -160,7 +166,9 @@ export const polls = router({
           commentsEnabled: input.commentsEnabled,
           ifNeedBeEnabled: input.ifNeedBeEnabled,
           voteLimitPerOptionEnabled: input.voteLimitPerOptionEnabled,
-          voteLimitPerOption: input.voteLimitPerOption
+          voteLimitPerOption: input.voteLimitPerOption,
+          voteLimitPerParticipantEnabled: input.voteLimitPerParticipantEnabled,
+          voteLimitPerParticipant: input.voteLimitPerParticipant
         },
       });
 
@@ -216,7 +224,9 @@ export const polls = router({
         commentsEnabled: z.boolean().optional(),
         ifNeedBeEnabled: z.boolean().optional(),
         voteLimitPerOptionEnabled: z.boolean().optional(),
-        voteLimitPerOption: z.number().optional()
+        voteLimitPerOption: z.number().optional(),
+        voteLimitPerParticipantEnabled: z.boolean().optional(),
+        voteLimitPerParticipant: z.number().optional()
       }),
     )
     .mutation(async ({ input }): Promise<GetPollApiResponse> => {
@@ -258,7 +268,9 @@ export const polls = router({
           commentsEnabled: input.commentsEnabled,
           ifNeedBeEnabled: input.ifNeedBeEnabled,
           voteLimitPerOptionEnabled: input.voteLimitPerOptionEnabled,
-          voteLimitPerOption: input.voteLimitPerOption
+          voteLimitPerOption: input.voteLimitPerOption,
+          voteLimitPerParticipantEnabled: input.voteLimitPerParticipantEnabled,
+          voteLimitPerParticipant: input.voteLimitPerParticipant
         },
       });
 

@@ -22,6 +22,7 @@ const PollOptions: React.FunctionComponent<PollOptions> = ({
 }) => {
   const { control } = useFormContext<ParticipantForm>();
   const {
+    poll,
     getParticipantsWhoVotedForOption,
     getParticipantById,
     getScore,
@@ -60,6 +61,10 @@ const PollOptions: React.FunctionComponent<PollOptions> = ({
                 field.onChange(newValue);
               };
 
+              const disabledForVoteLimitPerParticipant=(poll.voteLimitPerParticipantEnabled &&
+                  field.value.filter(vote => vote?.type != "no").length >= poll.voteLimitPerParticipant &&
+                  (vote ?? "no") == "no")
+
               switch (option.type) {
                 case "timeSlot":
                   return (
@@ -75,6 +80,7 @@ const PollOptions: React.FunctionComponent<PollOptions> = ({
                       duration={option.duration}
                       editable={editable}
                       selectedParticipantId={selectedParticipant?.id}
+                      disabledForVoteLimitPerParticipant={disabledForVoteLimitPerParticipant}
                     />
                   );
                 case "date":
@@ -90,6 +96,7 @@ const PollOptions: React.FunctionComponent<PollOptions> = ({
                       day={option.day}
                       editable={editable}
                       selectedParticipantId={selectedParticipant?.id}
+                      disabledForVoteLimitPerParticipant={disabledForVoteLimitPerParticipant}
                     />
                   );
               }

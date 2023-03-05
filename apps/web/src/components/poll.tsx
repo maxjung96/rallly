@@ -112,7 +112,7 @@ export const Poll = (props: { children?: React.ReactNode }) => {
                   <div>
                     <div className="mb-2 text-sm text-slate-500">
                       <Trans
-                          i18nKey="votesLimitedTo"
+                          i18nKey="votesPerOptionLimitedTo"
                           t={t}
                           values={{
                             limit: poll.voteLimitPerOption,
@@ -120,6 +120,19 @@ export const Poll = (props: { children?: React.ReactNode }) => {
                       />
                     </div>
                   </div>
+                ) : null}
+                {poll.voteLimitPerParticipantEnabled ? (
+                    <div>
+                      <div className="mb-2 text-sm text-slate-500">
+                        <Trans
+                            i18nKey="votesPerParticipantLimitedTo"
+                            t={t}
+                            values={{
+                              limit: poll.voteLimitPerParticipant,
+                            }}
+                        />
+                      </div>
+                    </div>
                 ) : null}
               </div>
             </div>

@@ -105,7 +105,11 @@ const ParticipantRowForm: React.ForwardRefRenderFunction<
                         newValue[index] = { optionId, type: vote };
                         field.onChange(newValue);
                       }}
-                      disabled={poll.voteLimitPerOptionEnabled && (getScore(optionId).yes + getScore(optionId).ifNeedBe) >= poll.voteLimitPerOption}
+                      disabled={
+                          (poll.voteLimitPerOptionEnabled && (getScore(optionId).yes + getScore(optionId).ifNeedBe) >= poll.voteLimitPerOption)
+                          || (poll.voteLimitPerParticipantEnabled &&
+                              field.value.filter(vote => vote?.type != "no").length >= poll.voteLimitPerParticipant &&
+                              (value ? value.type : "no") == "no")}
                       ref={(el) => {
                         checkboxRefs.current[index] = el;
                       }}

@@ -23,4 +23,6 @@ export type GetPollApiResponse = {
   ifNeedBeEnabled: boolean;
   voteLimitPerOptionEnabled: boolean;
   voteLimitPerOption: number | null;
+  voteLimitPerParticipantEnabled: boolean;
+  voteLimitPerParticipant: number | null;
 };

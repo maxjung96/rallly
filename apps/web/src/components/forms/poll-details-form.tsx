@@ -18,6 +18,8 @@ export interface PollDetailsData {
   ifNeedBeEnabled: boolean;
   voteLimitPerOptionEnabled: boolean;
   voteLimitPerOption?: number;
+  voteLimitPerParticipantEnabled: boolean;
+  voteLimitPerParticipant?: number;
 }
 
 export const PollDetailsForm: React.FunctionComponent<
@@ -40,6 +42,8 @@ export const PollDetailsForm: React.FunctionComponent<
   register("ifNeedBeEnabled");
   const [voteLimitPerOptionEnabled, setVoteLimitPerOptionEnabled] = React.useState(defaultValues?.voteLimitPerOptionEnabled ?? false);
   register("voteLimitPerOptionEnabled");
+  const [voteLimitPerParticipantEnabled, setVoteLimitPerParticipantEnabled] = React.useState(defaultValues?.voteLimitPerParticipantEnabled ?? false);
+  register("voteLimitPerParticipantEnabled");
 
   React.useEffect(() => {
     if (onChange) {
@@ -149,9 +153,6 @@ export const PollDetailsForm: React.FunctionComponent<
             onChange={(checked) => {
               setVoteLimitPerOptionEnabled(checked);
               setValue("voteLimitPerOptionEnabled", checked);
-              // if (!checked) {
-              //   setValue("voteLimitPerOption", undefined);
-              // }
             }}
         />
         <input
@@ -162,6 +163,33 @@ export const PollDetailsForm: React.FunctionComponent<
             placeholder="1"
             hidden={!voteLimitPerOptionEnabled}
             {...register("voteLimitPerOption",
+                { validate: (value, formValues) => value >= 1 || value === undefined,
+                  valueAsNumber: true})}
+        />
+      </div>
+      <div className="formField">
+        <Tooltip
+            content={t("voteLimitPerParticipantEnabledTooltip")}
+            placement="top"
+        >
+          <label htmlFor="voteLimitPerParticipantEnabled">{t("voteLimitPerParticipantEnabled")}</label>
+        </Tooltip>
+        <br/>
+        <Switch
+            checked={voteLimitPerParticipantEnabled}
+            onChange={(checked) => {
+              setVoteLimitPerParticipantEnabled(checked);
+              setValue("voteLimitPerParticipantEnabled", checked);
+            }}
+        />
+        <input
+            type="number"
+            id="voteLimitPerParticipant"
+            min="1"
+            className="input w-full"
+            placeholder="1"
+            hidden={!voteLimitPerParticipantEnabled}
+            {...register("voteLimitPerParticipant",
                 { validate: (value, formValues) => value >= 1 || value === undefined,
                   valueAsNumber: true})}
         />

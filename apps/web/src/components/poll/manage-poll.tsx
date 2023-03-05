@@ -162,7 +162,9 @@ const ManagePoll: React.FunctionComponent<{
           commentsEnabled: poll.commentsEnabled,
           ifNeedBeEnabled: poll.ifNeedBeEnabled,
           voteLimitPerOptionEnabled: poll.voteLimitPerOptionEnabled,
-          voteLimitPerOption: poll.voteLimitPerOption
+          voteLimitPerOption: poll.voteLimitPerOption,
+          voteLimitPerParticipantEnabled: poll.voteLimitPerParticipantEnabled,
+          voteLimitPerParticipant: poll.voteLimitPerParticipant
         }}
         className="w-[500px] p-3 sm:p-4"
         onSubmit={(data) => {
