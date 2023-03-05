@@ -163,7 +163,7 @@ export const PollDetailsForm: React.FunctionComponent<
             placeholder="1"
             hidden={!voteLimitPerOptionEnabled}
             {...register("voteLimitPerOption",
-                { validate: (value, formValues) => value >= 1 || value === undefined,
+                { validate: (value) => value >= 1 || value === undefined,
                   valueAsNumber: true})}
         />
       </div>
@@ -190,7 +190,7 @@ export const PollDetailsForm: React.FunctionComponent<
             placeholder="1"
             hidden={!voteLimitPerParticipantEnabled}
             {...register("voteLimitPerParticipant",
-                { validate: (value, formValues) => value >= 1 || value === undefined,
+                { validate: (value) => value >= 1 || value === undefined,
                   valueAsNumber: true})}
         />
       </div>
