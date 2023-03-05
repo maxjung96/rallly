@@ -12,6 +12,7 @@ export interface VoteSelectorProps {
   onBlur?: React.FocusEventHandler<HTMLButtonElement>;
   onKeyDown?: React.KeyboardEventHandler<HTMLButtonElement>;
   className?: string;
+  disabled: boolean;
 }
 
 const orderedVoteTypes: VoteType[] = ["yes", "ifNeedBe", "no"];
@@ -28,7 +29,7 @@ export const VoteSelector = React.forwardRef<
   HTMLButtonElement,
   VoteSelectorProps
 >(function VoteSelector(
-  { value, onChange, onFocus, onBlur, onKeyDown, className },
+  { value, onChange, onFocus, onBlur, onKeyDown, className , disabled},
   ref,
 ) {
   const { poll } = usePoll();
@@ -47,6 +48,7 @@ export const VoteSelector = React.forwardRef<
         onChange?.(value ? getNext(value, poll.ifNeedBeEnabled) : orderedVoteTypes[0]);
       }}
       ref={ref}
+      disabled={disabled}
     >
       <VoteIcon type={value} />
     </button>

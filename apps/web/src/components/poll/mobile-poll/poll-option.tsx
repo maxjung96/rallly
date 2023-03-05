@@ -182,6 +182,7 @@ const PollOption: React.FunctionComponent<PollOptionProps> = ({
   participants,
   editable = false,
   yesScore,
+  ifNeedBeScore,
   optionId,
 }) => {
   const { poll, getVote, admin } = usePoll();
@@ -268,6 +269,7 @@ const PollOption: React.FunctionComponent<PollOptionProps> = ({
                 ref={selectorRef}
                 value={vote}
                 onChange={onChange}
+                disabled={poll.voteLimitPerOptionEnabled && (yesScore + ifNeedBeScore) >= poll.voteLimitPerOption}
               />
             </div>
           ) : (

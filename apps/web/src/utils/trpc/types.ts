@@ -21,4 +21,6 @@ export type GetPollApiResponse = {
   hidden: boolean;
   commentsEnabled: boolean;
   ifNeedBeEnabled: boolean;
+  voteLimitPerOptionEnabled: boolean;
+  voteLimitPerOption: number | null;
 };

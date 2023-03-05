@@ -16,6 +16,8 @@ export interface PollDetailsData {
   hidden: boolean;
   commentsEnabled: boolean;
   ifNeedBeEnabled: boolean;
+  voteLimitPerOptionEnabled: boolean;
+  voteLimitPerOption?: number;
 }
 
 export const PollDetailsForm: React.FunctionComponent<
@@ -36,6 +38,8 @@ export const PollDetailsForm: React.FunctionComponent<
   register("commentsEnabled");
   const [ifNeedBeEnabled, setIfNeedBeEnabled] = React.useState(defaultValues?.ifNeedBeEnabled ?? true);
   register("ifNeedBeEnabled");
+  const [voteLimitPerOptionEnabled, setVoteLimitPerOptionEnabled] = React.useState(defaultValues?.voteLimitPerOptionEnabled ?? false);
+  register("voteLimitPerOptionEnabled");
 
   React.useEffect(() => {
     if (onChange) {
@@ -130,6 +134,36 @@ export const PollDetailsForm: React.FunctionComponent<
               setIfNeedBeEnabled(checked);
               setValue("ifNeedBeEnabled", checked);
             }}
+        />
+      </div>
+      <div className="formField">
+        <Tooltip
+            content={t("voteLimitPerOptionEnabledTooltip")}
+            placement="top"
+        >
+          <label htmlFor="voteLimitPerOptionEnabled">{t("voteLimitPerOptionEnabled")}</label>
+        </Tooltip>
+        <br/>
+        <Switch
+            checked={voteLimitPerOptionEnabled}
+            onChange={(checked) => {
+              setVoteLimitPerOptionEnabled(checked);
+              setValue("voteLimitPerOptionEnabled", checked);
+              // if (!checked) {
+              //   setValue("voteLimitPerOption", undefined);
+              // }
+            }}
+        />
+        <input
+            type="number"
+            id="voteLimitPerOption"
+            min="1"
+            className="input w-full"
+            placeholder="1"
+            hidden={!voteLimitPerOptionEnabled}
+            {...register("voteLimitPerOption",
+                { validate: (value, formValues) => value >= 1 || value === undefined,
+                  valueAsNumber: true})}
         />
       </div>
     </form>

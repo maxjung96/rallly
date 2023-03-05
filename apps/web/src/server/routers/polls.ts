@@ -38,6 +38,8 @@ const defaultSelectFields: {
   hidden: true;
   commentsEnabled: true;
   ifNeedBeEnabled: true;
+  voteLimitPerOptionEnabled: true;
+  voteLimitPerOption: true;
 } = {
   id: true,
   timeZone: true,
@@ -63,6 +65,8 @@ const defaultSelectFields: {
   hidden: true,
   commentsEnabled: true,
   ifNeedBeEnabled: true,
+  voteLimitPerOptionEnabled: true,
+  voteLimitPerOption: true,
 };
 
 const getPollIdFromAdminUrlId = async (urlId: string) => {
@@ -99,7 +103,9 @@ export const polls = router({
         demo: z.boolean().optional(),
         hidden: z.boolean().optional(),
         commentsEnabled: z.boolean().optional(),
-        ifNeedBeEnabled: z.boolean().optional()
+        ifNeedBeEnabled: z.boolean().optional(),
+        voteLimitPerOptionEnabled: z.boolean().optional(),
+        voteLimitPerOption: z.number().optional()
       }),
     )
     .mutation(async ({ ctx, input }): Promise<{ urlId: string }> => {
@@ -152,7 +158,9 @@ export const polls = router({
           },
           hidden: input.hidden,
           commentsEnabled: input.commentsEnabled,
-          ifNeedBeEnabled: input.ifNeedBeEnabled
+          ifNeedBeEnabled: input.ifNeedBeEnabled,
+          voteLimitPerOptionEnabled: input.voteLimitPerOptionEnabled,
+          voteLimitPerOption: input.voteLimitPerOption
         },
       });
 
@@ -206,7 +214,9 @@ export const polls = router({
         closed: z.boolean().optional(),
         hidden: z.boolean().optional(),
         commentsEnabled: z.boolean().optional(),
-        ifNeedBeEnabled: z.boolean().optional()
+        ifNeedBeEnabled: z.boolean().optional(),
+        voteLimitPerOptionEnabled: z.boolean().optional(),
+        voteLimitPerOption: z.number().optional()
       }),
     )
     .mutation(async ({ input }): Promise<GetPollApiResponse> => {
@@ -246,7 +256,9 @@ export const polls = router({
           closed: input.closed,
           hidden: input.hidden,
           commentsEnabled: input.commentsEnabled,
-          ifNeedBeEnabled: input.ifNeedBeEnabled
+          ifNeedBeEnabled: input.ifNeedBeEnabled,
+          voteLimitPerOptionEnabled: input.voteLimitPerOptionEnabled,
+          voteLimitPerOption: input.voteLimitPerOption
         },
       });
 

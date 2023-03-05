@@ -160,7 +160,9 @@ const ManagePoll: React.FunctionComponent<{
           description: poll.description ?? "",
           hidden: poll.hidden,
           commentsEnabled: poll.commentsEnabled,
-          ifNeedBeEnabled: poll.ifNeedBeEnabled
+          ifNeedBeEnabled: poll.ifNeedBeEnabled,
+          voteLimitPerOptionEnabled: poll.voteLimitPerOptionEnabled,
+          voteLimitPerOption: poll.voteLimitPerOption
         }}
         className="w-[500px] p-3 sm:p-4"
         onSubmit={(data) => {

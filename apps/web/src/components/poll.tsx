@@ -1,4 +1,4 @@
-import { useTranslation } from "next-i18next";
+import {Trans, useTranslation} from "next-i18next";
 import React from "react";
 
 import Discussion from "@/components/discussion";
@@ -108,6 +108,19 @@ export const Poll = (props: { children?: React.ReactNode }) => {
                     </span>
                   </div>
                 </div>
+                {poll.voteLimitPerOptionEnabled ? (
+                  <div>
+                    <div className="mb-2 text-sm text-slate-500">
+                      <Trans
+                          i18nKey="votesLimitedTo"
+                          t={t}
+                          values={{
+                            limit: poll.voteLimitPerOption,
+                          }}
+                      />
+                    </div>
+                  </div>
+                ) : null}
               </div>
             </div>
           </div>

@@ -33,7 +33,7 @@ const ParticipantRowForm: React.ForwardRefRenderFunction<
     goToNextPage,
   } = usePollContext();
 
-  const { options, optionIds } = usePoll();
+  const { poll, options, optionIds, getScore } = usePoll();
   const { handleSubmit, control } = useForm({
     defaultValues: {
       votes: [],
@@ -105,6 +105,7 @@ const ParticipantRowForm: React.ForwardRefRenderFunction<
                         newValue[index] = { optionId, type: vote };
                         field.onChange(newValue);
                       }}
+                      disabled={poll.voteLimitPerOptionEnabled && (getScore(optionId).yes + getScore(optionId).ifNeedBe) >= poll.voteLimitPerOption}
                       ref={(el) => {
                         checkboxRefs.current[index] = el;
                       }}
