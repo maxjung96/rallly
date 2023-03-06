@@ -65,7 +65,9 @@ const Page: React.FunctionComponent<CreatePollPageProps> = ({
       },
       settings : {
         commentsEnabled: true,
-        ifNeedBeEnabled: true
+        ifNeedBeEnabled: true,
+        voteLimitPerOptionEnabled: false,
+        voteLimitPerParticipantEnabled: false,
       },
       options: {
         view,

@@ -128,8 +128,8 @@ export const PollSettingsForm: React.FunctionComponent<
                     hidden={!voteLimitPerOptionEnabled}
                     {...register("voteLimitPerOption",
                         {
-                            validate: (value) => value >= 1 || value === undefined,
-                            valueAsNumber: true
+                            validate: (value) => (value ?? 1) >= 1 || isNaN(value),
+                            setValueAs: v => v ? parseInt(v) : undefined
                         })}
                 />
             </div>
@@ -157,8 +157,8 @@ export const PollSettingsForm: React.FunctionComponent<
                     hidden={!voteLimitPerParticipantEnabled}
                     {...register("voteLimitPerParticipant",
                         {
-                            validate: (value) => value >= 1 || value === undefined,
-                            valueAsNumber: true
+                            validate: (value) => (value ?? 1) >= 1 || isNaN(value),
+                            setValueAs: v => v ? parseInt(v) : undefined
                         })}
                 />
             </div>
