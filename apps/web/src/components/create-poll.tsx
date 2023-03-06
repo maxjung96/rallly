@@ -13,15 +13,17 @@ import {
   PollDetailsForm,
   PollOptionsData,
   PollOptionsForm,
+  PollSettingsData,
+  PollSettingsForm,
   UserDetailsData,
   UserDetailsForm,
 } from "./forms";
 import Steps from "./steps";
 import { useUser } from "./user-provider";
 
-type StepName = "eventDetails" | "options" | "userDetails";
+type StepName = "eventDetails" | "settings" | "options" | "userDetails";
 
-const steps: StepName[] = ["eventDetails", "options", "userDetails"];
+const steps: StepName[] = ["eventDetails", "settings", "options", "userDetails"];
 
 const required = <T,>(v: T | undefined): T => {
   if (!v) {
@@ -59,7 +61,9 @@ const Page: React.FunctionComponent<CreatePollPageProps> = ({
       eventDetails: {
         title,
         location,
-        description,
+        description
+      },
+      settings : {
         commentsEnabled: true,
         ifNeedBeEnabled: true
       },
@@ -106,7 +110,7 @@ const Page: React.FunctionComponent<CreatePollPageProps> = ({
   const isBusy = isRedirecting || createPoll.isLoading;
 
   const handleSubmit = async (
-    data: PollDetailsData | PollOptionsData | UserDetailsData,
+    data: PollDetailsData | PollSettingsData | PollOptionsData | UserDetailsData,
   ) => {
     if (currentStepIndex < steps.length - 1) {
       setFormData({
@@ -129,15 +133,19 @@ const Page: React.FunctionComponent<CreatePollPageProps> = ({
         },
         timeZone: formData?.options?.timeZone,
         options: required(formData?.options?.options).map(encodeDateOption),
-        hidden: formData?.eventDetails?.hidden,
-        commentsEnabled: formData?.eventDetails?.commentsEnabled,
-        ifNeedBeEnabled: formData?.eventDetails?.ifNeedBeEnabled
+        hidden: formData?.settings?.hidden,
+        commentsEnabled: formData?.settings?.commentsEnabled,
+        ifNeedBeEnabled: formData?.settings?.ifNeedBeEnabled,
+        voteLimitPerOptionEnabled: formData?.settings?.voteLimitPerOptionEnabled,
+        voteLimitPerOption: formData?.settings?.voteLimitPerOption,
+        voteLimitPerParticipantEnabled: formData?.settings?.voteLimitPerParticipantEnabled,
+        voteLimitPerParticipant: formData?.settings?.voteLimitPerParticipant,
       });
     }
   };
 
   const handleChange = (
-    data: Partial<PollDetailsData | PollOptionsData | UserDetailsData>,
+    data: Partial<PollDetailsData | PollSettingsData | PollOptionsData | UserDetailsData>,
   ) => {
     setFormData({
       ...formData,
@@ -168,6 +176,16 @@ const Page: React.FunctionComponent<CreatePollPageProps> = ({
                       onSubmit={handleSubmit}
                       onChange={handleChange}
                     />
+                  );
+                case "settings":
+                  return (
+                      <PollSettingsForm
+                          className="max-w-full p-3 sm:p-4"
+                          name={currentStepName}
+                          defaultValues={formData?.settings}
+                          onSubmit={handleSubmit}
+                          onChange={handleChange}
+                      />
                   );
                 case "options":
                   return (

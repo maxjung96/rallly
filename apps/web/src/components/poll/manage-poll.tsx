@@ -13,7 +13,7 @@ import Trash from "@/components/icons/trash.svg";
 import { encodeDateOption } from "@/utils/date-time-utils";
 
 import Dropdown, { DropdownItem } from "../dropdown";
-import { PollDetailsForm } from "../forms";
+import {PollDetailsForm, PollSettingsForm} from "../forms";
 import { useModal } from "../modal";
 import { useModalContext } from "../modal/modal-provider";
 import { usePoll } from "../poll-context";
@@ -157,14 +157,7 @@ const ManagePoll: React.FunctionComponent<{
         defaultValues={{
           title: poll.title,
           location: poll.location ?? "",
-          description: poll.description ?? "",
-          hidden: poll.hidden,
-          commentsEnabled: poll.commentsEnabled,
-          ifNeedBeEnabled: poll.ifNeedBeEnabled,
-          voteLimitPerOptionEnabled: poll.voteLimitPerOptionEnabled,
-          voteLimitPerOption: poll.voteLimitPerOption,
-          voteLimitPerParticipantEnabled: poll.voteLimitPerParticipantEnabled,
-          voteLimitPerParticipant: poll.voteLimitPerParticipant
+          description: poll.description ?? ""
         }}
         className="w-[500px] p-3 sm:p-4"
         onSubmit={(data) => {
@@ -177,10 +170,48 @@ const ManagePoll: React.FunctionComponent<{
       />
     ),
   });
+
+  const [
+      changePollSettingsModalContextHolder,
+      openChangePollSettingsModa,
+      closePollSettingsModal,
+  ] = useModal({
+      okText: t("save"),
+      okButtonProps: {
+          form: "updateSettings",
+          loading: isUpdating,
+          htmlType: "submit",
+      },
+      cancelText: t("cancel"),
+      content: (
+          <PollSettingsForm
+              name="updateSettings"
+              defaultValues={{
+                  hidden: poll.hidden,
+                  commentsEnabled: poll.commentsEnabled,
+                  ifNeedBeEnabled: poll.ifNeedBeEnabled,
+                  voteLimitPerOptionEnabled: poll.voteLimitPerOptionEnabled,
+                  voteLimitPerOption: poll.voteLimitPerOption,
+                  voteLimitPerParticipantEnabled: poll.voteLimitPerParticipantEnabled,
+                  voteLimitPerParticipant: poll.voteLimitPerParticipant
+              }}
+              className="w-[500px] p-3 sm:p-4"
+              onSubmit={(data) => {
+                  //submit
+                  updatePollMutation(
+                      { urlId, ...data },
+                      { onSuccess: closePollSettingsModal },
+                  );
+              }}
+          />
+      ),
+  });
+
   return (
     <div>
       {changeOptionsModalContextHolder}
       {changePollDetailsModalContextHolder}
+      {changePollSettingsModalContextHolder}
       <Dropdown
         placement={placement}
         trigger={<Button icon={<Cog />}>{t("manage")}</Button>}
@@ -189,6 +220,11 @@ const ManagePoll: React.FunctionComponent<{
           icon={Pencil}
           label={t("editDetails")}
           onClick={openChangePollDetailsModa}
+        />
+        <DropdownItem
+            icon={Cog}
+            label={t("editSettings")}
+            onClick={openChangePollSettingsModa}
         />
         <DropdownItem
           icon={Table}

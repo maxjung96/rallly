@@ -1,10 +1,12 @@
 import { PollDetailsData } from "./poll-details-form";
 import { PollOptionsData } from "./poll-options-form/poll-options-form";
+import { PollSettingsData } from "./poll-settings-form";
 import { UserDetailsData } from "./user-details-form";
 
 export interface NewEventData {
   currentStep: number;
   eventDetails?: Partial<PollDetailsData>;
+  settings?: Partial<PollSettingsData>;
   options?: Partial<PollOptionsData>;
   userDetails?: Partial<UserDetailsData>;
 }
