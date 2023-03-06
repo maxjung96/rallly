@@ -1,4 +1,4 @@
-import {Trans, useTranslation} from "next-i18next";
+import { Trans, useTranslation } from "next-i18next";
 import React from "react";
 
 import Discussion from "@/components/discussion";

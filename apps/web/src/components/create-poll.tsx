@@ -61,7 +61,7 @@ const Page: React.FunctionComponent<CreatePollPageProps> = ({
       eventDetails: {
         title,
         location,
-        description
+        description,
       },
       settings : {
         commentsEnabled: true,

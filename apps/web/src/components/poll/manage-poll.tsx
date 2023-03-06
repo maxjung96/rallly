@@ -13,7 +13,7 @@ import Trash from "@/components/icons/trash.svg";
 import { encodeDateOption } from "@/utils/date-time-utils";
 
 import Dropdown, { DropdownItem } from "../dropdown";
-import {PollDetailsForm, PollSettingsForm} from "../forms";
+import { PollDetailsForm, PollSettingsForm } from "../forms";
 import { useModal } from "../modal";
 import { useModalContext } from "../modal/modal-provider";
 import { usePoll } from "../poll-context";
@@ -157,7 +157,7 @@ const ManagePoll: React.FunctionComponent<{
         defaultValues={{
           title: poll.title,
           location: poll.location ?? "",
-          description: poll.description ?? ""
+          description: poll.description ?? "",
         }}
         className="w-[500px] p-3 sm:p-4"
         onSubmit={(data) => {

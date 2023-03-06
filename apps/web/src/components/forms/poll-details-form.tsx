@@ -20,7 +20,7 @@ export const PollDetailsForm: React.FunctionComponent<
     handleSubmit,
     register,
     watch,
-    formState: { errors }
+    formState: { errors },
   } = useForm<PollDetailsData>({ defaultValues });
 
   React.useEffect(() => {
