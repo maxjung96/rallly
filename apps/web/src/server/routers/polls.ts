@@ -178,7 +178,7 @@ export const polls = router({
         if (poll.verified) {
           await sendEmail("NewPollEmail", {
             to: input.user.email,
-            subject: `Your poll for ${poll.title} has been created`,
+            subject: `${poll.title} has been created`,
             props: {
               title: poll.title,
               name: input.user.name,
@@ -193,7 +193,7 @@ export const polls = router({
 
           await sendEmail("NewPollVerificationEmail", {
             to: input.user.email,
-            subject: `Your poll for ${poll.title} has been created`,
+            subject: `${poll.title} has been created`,
             props: {
               title: poll.title,
               name: input.user.name,
